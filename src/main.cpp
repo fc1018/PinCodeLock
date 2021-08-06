@@ -66,7 +66,7 @@ int readButtons(int buttonsArr[4]) {  // Function to take button inputs and
     }
   }
 
-  Serial.print("Input was:");
+  Serial.print("Input was: ");
 
   for (int i = 0; i < 4; i++) {  // Prints stored code in terminal
     Serial.print(buttonsArr[i]);
