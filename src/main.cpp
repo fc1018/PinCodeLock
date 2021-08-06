@@ -16,13 +16,6 @@ void setup() {
 
 void loop() {}
 
-// button 0 = 168
-// button 1 = 202
-// button 2 = 253
-// button 3 = 338
-// button 4 = 509
-// button 5 = 1023
-
 int readButtons(int buttonsArr[4]) {  // Function to take button inputs and
                                       // store in input array
                                       // array
