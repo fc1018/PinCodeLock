@@ -13,6 +13,8 @@ void setup() {
   lock.attach(3);
   Serial.begin(9600);
 
+  lock.write(0);  // Lock deactivated
+
   readButtons(passcode);
 
   lock.write(90);  // Lock activated
