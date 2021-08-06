@@ -35,7 +35,6 @@ void loop() {
 
 int readButtons(int buttonsArr[4]) {  // Function to take button inputs and
                                       // store in input array
-                                      // array
   int buttonsPressed = 0;
 
   while (buttonsPressed < 4) {
