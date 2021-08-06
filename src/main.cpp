@@ -12,10 +12,6 @@ void setup() {
   Serial.begin(9600);
 
   readButtons(passcode);
-
-  for (int i = 0; i < 4; i++) {
-    Serial.println(passcode[i]);
-  }
 }
 
 void loop() {}
