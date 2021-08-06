@@ -46,7 +46,6 @@ int readButtons(int& passcode) {  // Function to take button inputs and
       // passcode += 0 * round(pow(10, 3 - buttonsPressed));
     } else if (buttonVal <= 220) {  // button 1 pressed
       passcode += 1 * round(pow(10, 3 - buttonsPressed));
-
     } else if (buttonVal <= 290) {  // button 2 pressed
       passcode += 2 * round(pow(10, 3 - buttonsPressed));
     } else if (buttonVal <= 400) {  // button 3 pressed
