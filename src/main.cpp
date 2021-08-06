@@ -5,8 +5,10 @@ Servo lock;             // Locking mechanism
 const int button = A0;  // Analog read of voltage at end of resistor ladder
 int passcode[4];
 int attempt[4];
+
 int readButtons(int buttonsArr[4]);
 bool isPasscodeRight();
+
 void setup() {
   lock.attach(3);
   Serial.begin(9600);
@@ -20,14 +22,13 @@ void loop() {
   do {
     readButtons(attempt);
     isPasscodeRight();
-  }
-  while (isPasscodeRight() == false);
+  } while (isPasscodeRight() == false);
 
-  lock.write(0); //lock deactivated
+  lock.write(0);  // lock deactivated
 
   delay(10000);
 
-  lock.write(90); //lock reactivated
+  lock.write(90);  // lock reactivated
 }
 
 int readButtons(int buttonsArr[4]) {  // Function to take button inputs and
@@ -73,17 +74,13 @@ int readButtons(int buttonsArr[4]) {  // Function to take button inputs and
 bool isPasscodeRight() {
   if (passcode[0] != attempt[0]) {
     return false;
-  }
-  else if (passcode[1] != attempt[1]) {
+  } else if (passcode[1] != attempt[1]) {
     return false;
-  }
-  else if (passcode[2] != attempt[2]) {
+  } else if (passcode[2] != attempt[2]) {
     return false;
-  }
-  else if (passcode[3] != attempt[3]) {
+  } else if (passcode[3] != attempt[3]) {
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }
