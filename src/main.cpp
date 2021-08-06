@@ -3,10 +3,11 @@
 
 Servo lock;             // Locking mechanism
 const int button = A0;  // Analog read of voltage at end of resistor ladder
-int passcode[4];
-int attempt[4];
 
-int readButtons(int buttonsArr[4]);
+int passcode = 0;
+int attempt = 0;
+
+int readButtons(int& passcode);
 bool isPasscodeRight();
 
 void setup() {
@@ -33,55 +34,38 @@ void loop() {
   lock.write(90);  // lock reactivated
 }
 
-int readButtons(int buttonsArr[4]) {  // Function to take button inputs and
-                                      // store in input array
+int readButtons(int& passcode) {  // Function to take button inputs and
+                                  // store in input array
   int buttonsPressed = 0;
-
   while (buttonsPressed < 4) {
     int buttonVal = analogRead(A0);  // Read voltage at end of resistor ladder
 
     if (buttonVal < 50) {  // Ignore noise
       continue;
     } else if (buttonVal <= 180) {  // button 0 pressed
-      buttonsArr[buttonsPressed] = 0;
+      // passcode += 0 * round(pow(10, 3 - buttonsPressed));
     } else if (buttonVal <= 220) {  // button 1 pressed
-      buttonsArr[buttonsPressed] = 1;
+      passcode += 1 * round(pow(10, 3 - buttonsPressed));
+
     } else if (buttonVal <= 290) {  // button 2 pressed
-      buttonsArr[buttonsPressed] = 2;
+      passcode += 2 * round(pow(10, 3 - buttonsPressed));
     } else if (buttonVal <= 400) {  // button 3 pressed
-      buttonsArr[buttonsPressed] = 3;
+      passcode += 3 * round(pow(10, 3 - buttonsPressed));
     } else if (buttonVal <= 750) {  // button 4 pressed
-      buttonsArr[buttonsPressed] = 4;
+      passcode += 4 * round(pow(10, 3 - buttonsPressed));
     } else if (buttonVal <= 1024) {  // button 5 pressed
-      buttonsArr[buttonsPressed] = 5;
+      passcode += 5 * round(pow(10, 3 - buttonsPressed));
     }
     buttonsPressed++;
     delay(200);  // delay to avoid multiple inputs
-    Serial.print(buttonsPressed);
-    Serial.println();
   }
 
   Serial.print("Input was: ");
 
-  for (int i = 0; i < 4; i++) {
-    Serial.print(buttonsArr[i]);
-  }
-
+  Serial.print(passcode);
   Serial.println();
 
   return 0;
 }
 
-bool isPasscodeRight() {
-  if (passcode[0] != attempt[0]) {
-    return false;
-  } else if (passcode[1] != attempt[1]) {
-    return false;
-  } else if (passcode[2] != attempt[2]) {
-    return false;
-  } else if (passcode[3] != attempt[3]) {
-    return false;
-  } else {
-    return true;
-  }
-}
+bool isPasscodeRight() { return passcode == attempt; }
